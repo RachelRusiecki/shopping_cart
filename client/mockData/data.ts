@@ -1,4 +1,6 @@
-export const mockProducts = [
+import type { Product, Cart } from "../frontend/src/types";
+
+export const mockProducts: Product[] = [
   {
     _id: "1",
     title: "Amazon Kindle E-reader",
@@ -25,7 +27,7 @@ export const mockProducts = [
   },
 ];
 
-export const mockCart = [
+export const mockCart: Cart[] = [
   {
     _id: "a1",
     productId: "1",
