@@ -1,8 +1,12 @@
 import { useState } from "react";
-import type { FormFields } from "../types";
+import { updateProduct } from "../services";
+import type { Product } from "../types";
 
 interface EditFormProps {
+  products: Product[],
+  setProducts: React.Dispatch<React.SetStateAction<Product[]>>
   isVisible: boolean,
+  _id: string,
   title: string,
   price: number,
   quantity: number,
@@ -10,7 +14,10 @@ interface EditFormProps {
 };
 
 const EditForm = ({
+  products,
+  setProducts,
   isVisible,
+  _id,
   title,
   price,
   quantity,
@@ -19,16 +26,31 @@ const EditForm = ({
 
   const [formData, setFormData] = useState({ title, price, quantity });
 
-  const handleChange = (event: FormFields) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({...formData, [name]: value });
+  };
+
+  const handleSubmit = async (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    const updatedProduct = {
+      title: formData["title"],
+      price: formData["price"],
+      quantity: formData["quantity"],
+    };
+
+    const response = await updateProduct(_id, updatedProduct);
+    toggleEditForm();
+    setProducts(products.map(product => {
+      return product._id === _id ? response : product;
+    }));
   };
 
   if (isVisible) {
     return (
       <div className="edit-form">
         <h3>Edit Product</h3>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label htmlFor="product-name">{title}</label>
             <input

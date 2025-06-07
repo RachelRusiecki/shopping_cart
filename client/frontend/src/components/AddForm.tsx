@@ -1,4 +1,4 @@
-import type { FormFields, Product } from "../types";
+import type { Product } from "../types";
 import { addNew } from "../services";
 import { useState } from "react";
 
@@ -15,7 +15,7 @@ const AddForm = ({ handleClick, products, setProducts }: AddFormProps) => {
     "product-quantity": "",
   });
 
-  const handleChange = (event: FormFields) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({...formData, [name]: value })
   };

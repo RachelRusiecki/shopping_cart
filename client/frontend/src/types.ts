@@ -15,6 +15,10 @@ export interface NewProduct {
   price: string
 };
 
-export interface Cart extends Product { productId: string };
+export interface UpdatedProduct {
+  title: string,
+  quantity: number,
+  price: number
+};
 
-export interface FormFields { target: { name: string, value: string } };
+export interface Cart extends Product { productId: string };
