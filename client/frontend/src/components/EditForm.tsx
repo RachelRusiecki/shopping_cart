@@ -67,7 +67,7 @@ const EditForm = ({
             name="price"
             type="number"
             id="product-price"
-            value={formData.price}
+            value={formData.price.toFixed(2)}
             aria-label="Product Price"
           />
         </div>

@@ -26,7 +26,7 @@ const ProductCart = ({ cart }: CartProps) => {
                 <tr key={_id}>
                   <td>{title}</td>
                   <td>{quantity}</td>
-                  <td>${price * quantity}</td>
+                  <td>${(price * quantity).toFixed(2)}</td>
                 </tr>
               )
             })}
@@ -36,7 +36,7 @@ const ProductCart = ({ cart }: CartProps) => {
               <td colSpan={3} className="total">
                 Total: ${cart.reduce((total, { price, quantity }) => {
                   return total + (price * quantity)
-                }, 0)}
+                }, 0).toFixed(2)}
               </td>
             </tr>
           </tfoot>
