@@ -5,8 +5,11 @@ export interface AddProps {
 export interface Product {
   _id: string,
   title: string,
+  price: number,
   quantity: number,
-  price: number
+  createdAt: string,
+  updatedAt: string,
+  _v: number
 };
 
 export interface NewProduct {
@@ -15,7 +18,11 @@ export interface NewProduct {
   price: string
 };
 
-export type UpdatedProduct = Omit<Product, "_id">;
+export type UpdatedProduct = {
+  title: string,
+  quantity: number,
+  price: number
+};
 
 export interface Cart extends Product {
   productId: string,
@@ -25,14 +32,6 @@ export interface Cart extends Product {
 };
 
 export interface CartRes {
-  product: {
-    _id: string,
-    title: string,
-    price: number,
-    quantity: number,
-    createdAt: string,
-    updatedAt: string,
-    _v: number
-  },
+  product: Product,
   item: Cart
 };

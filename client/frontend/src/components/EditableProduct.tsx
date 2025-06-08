@@ -71,7 +71,7 @@ const EditableProduct = ({
           <button
           className="add-to-cart"
           onClick={handleAddToCart}
-          disabled={displayEditForm}>
+          disabled={displayEditForm || quantity < 1}>
             Add to Cart
           </button>
           <button
