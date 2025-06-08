@@ -15,10 +15,24 @@ export interface NewProduct {
   price: string
 };
 
-export interface UpdatedProduct {
-  title: string,
-  quantity: number,
-  price: number
+export type UpdatedProduct = Omit<Product, "_id">;
+
+export interface Cart extends Product {
+  productId: string,
+  createdAt: string,
+  updatedAt: string,
+  _v: number
 };
 
-export interface Cart extends Product { productId: string };
+export interface CartRes {
+  product: {
+    _id: string,
+    title: string,
+    price: number,
+    quantity: number,
+    createdAt: string,
+    updatedAt: string,
+    _v: number
+  },
+  item: Cart
+};

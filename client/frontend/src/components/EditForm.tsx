@@ -5,7 +5,6 @@ import type { Product } from "../types";
 interface EditFormProps {
   products: Product[],
   setProducts: React.Dispatch<React.SetStateAction<Product[]>>
-  isVisible: boolean,
   _id: string,
   title: string,
   price: number,
@@ -16,7 +15,6 @@ interface EditFormProps {
 const EditForm = ({
   products,
   setProducts,
-  isVisible,
   _id,
   title,
   price,
@@ -46,55 +44,53 @@ const EditForm = ({
     }));
   };
 
-  if (isVisible) {
-    return (
-      <div className="edit-form">
-        <h3>Edit Product</h3>
-        <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label htmlFor="product-name">{title}</label>
-            <input
-              onChange={handleChange}
-              name="title"
-              type="text"
-              id="product-name"
-              value={formData.title}
-              aria-label="Product Name"
-            />
-          </div>
+  return (
+    <div className="edit-form">
+      <h3>Edit Product</h3>
+      <form onSubmit={handleSubmit}>
+        <div className="input-group">
+          <label htmlFor="product-name">{title}</label>
+          <input
+            onChange={handleChange}
+            name="title"
+            type="text"
+            id="product-name"
+            value={formData.title}
+            aria-label="Product Name"
+          />
+        </div>
 
-          <div className="input-group">
-            <label htmlFor="product-price">Price</label>
-            <input
-              onChange={handleChange}
-              name="price"
-              type="number"
-              id="product-price"
-              value={formData.price}
-              aria-label="Product Price"
-            />
-          </div>
+        <div className="input-group">
+          <label htmlFor="product-price">Price</label>
+          <input
+            onChange={handleChange}
+            name="price"
+            type="number"
+            id="product-price"
+            value={formData.price}
+            aria-label="Product Price"
+          />
+        </div>
 
-          <div className="input-group">
-            <label htmlFor="product-quantity">Quantity</label>
-            <input
-              onChange={handleChange}
-              name="quantity"
-              type="number"
-              id="product-quantity"
-              value={formData.quantity}
-              aria-label="Product Quantity"
-            />
-          </div>
+        <div className="input-group">
+          <label htmlFor="product-quantity">Quantity</label>
+          <input
+            onChange={handleChange}
+            name="quantity"
+            type="number"
+            id="product-quantity"
+            value={formData.quantity}
+            aria-label="Product Quantity"
+          />
+        </div>
 
-          <div className="actions form-actions">
-            <button type="submit">Update</button>
-            <button type="button" onClick={toggleEditForm}>Cancel</button>
-          </div>
-        </form>
-      </div>
-    )
-  }
+        <div className="actions form-actions">
+          <button type="submit">Update</button>
+          <button type="button" onClick={toggleEditForm}>Cancel</button>
+        </div>
+      </form>
+    </div>
+  )
 }
 
 export default EditForm;

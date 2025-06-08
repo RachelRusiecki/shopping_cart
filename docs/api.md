@@ -232,7 +232,7 @@ Updated product and item are returned wrapped in an object.
   },
   "item": {
   {
-    "_id": "51d754d72092473333a809e1",
+    "_id": "5newidndfk dkfgdngjndfg",
     "title": "Mac Mini",
     "price": 850,
     "quantity": 3,
@@ -242,5 +242,6 @@ Updated product and item are returned wrapped in an object.
     "_v": 0
   }
   }
+}
 }
 ```

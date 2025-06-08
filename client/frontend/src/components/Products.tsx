@@ -1,12 +1,14 @@
 import EditableProduct from "./EditableProduct";
-import type { Product } from "../types";
+import type { Product, Cart } from "../types";
 
 interface ProductsProps {
   products: Product[],
   setProducts: React.Dispatch<React.SetStateAction<Product[]>>
+  cart: Cart[],
+  setCart: React.Dispatch<React.SetStateAction<Cart[]>>
 };
 
-const Products = ({ products, setProducts }: ProductsProps) => {
+const Products = ({ products, setProducts, cart, setCart }: ProductsProps) => {
   return (
     <div className="product-listing">
       <h2>Products</h2>
@@ -16,6 +18,8 @@ const Products = ({ products, setProducts }: ProductsProps) => {
             key={_id}
             products={products}
             setProducts={setProducts}
+            cart={cart}
+            setCart={setCart}
             _id={_id}
             title={title}
             price={price}

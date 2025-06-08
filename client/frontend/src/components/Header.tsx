@@ -1,17 +1,17 @@
 import ProductCart from "./ProductCart";
-import { getAllCartProducts } from "../services";
-import { useState, useEffect } from "react";
+import { checkout } from "../services";
 import type { Cart } from "../types";
 
-const Header = () => {
-  const [cart, setCart] = useState<Cart[]>([]);
+interface HeaderProps {
+  cart: Cart[],
+  setCart: React.Dispatch<React.SetStateAction<Cart[]>>
+};
 
-  useEffect(() => {
-    (async () => {
-      const fetchedCartProducts = await getAllCartProducts();
-      setCart(fetchedCartProducts);
-    })();
-  }, []);
+const Header = ({ cart, setCart }: HeaderProps) => {
+  const handleCheckout = async () => {
+    await checkout();
+    setCart([]);
+  };
 
   return (
     <header>
@@ -19,7 +19,10 @@ const Header = () => {
       <div className="cart">
         <h2>Your Cart</h2>
         <ProductCart cart={cart} />
-        <button className="checkout" disabled={cart.length === 0}>
+        <button
+          className="checkout"
+          onClick={handleCheckout}
+          disabled={cart.length === 0} >
           Checkout
         </button>
       </div>
