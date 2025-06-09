@@ -29,6 +29,7 @@ const AddForm = ({ handleClick, products, setProducts }: AddFormProps) => {
     };
 
     const response = await addNew(newProduct);
+    handleClick(event);
     setProducts(products.concat(response));
   };
 

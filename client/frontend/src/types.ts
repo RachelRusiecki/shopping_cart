@@ -24,14 +24,6 @@ export type UpdatedProduct = {
   price: number
 };
 
-export interface Cart extends Product {
-  productId: string,
-  createdAt: string,
-  updatedAt: string,
-  _v: number
-};
+export interface Cart extends Product { productId: string };
 
-export interface CartRes {
-  product: Product,
-  item: Cart
-};
+export interface CartRes { product: Product, item: Cart };
