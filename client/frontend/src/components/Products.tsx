@@ -1,4 +1,5 @@
 import EditableProduct from "./EditableProduct";
+import Arrow from "./Arrow";
 import { useState } from "react";
 import type { CartActions, Product, ProductActions } from "../types";
 
@@ -13,21 +14,55 @@ const Products = ({
   productDispatch,
   cartDispatch
 }: ProductsProps) => {
-  const [sortedBy, setsortedBy] = useState("name");
+  const [sortedBy, setSortedBy] = useState({ name: "title", ascending: true });
+
+  const handleSortBy = (sortBy: "title" | "price" | "quantity") => {
+    return () => {
+      setSortedBy({
+        name: sortBy,
+        ascending: sortedBy.name === sortBy ? !sortedBy.ascending : true
+      });
+    }
+  };
+
+  if (sortedBy.name === 'title') {
+    products.sort((a, b) => a.title.localeCompare(b.title));
+  } else if (sortedBy.name === "price") {
+    products.sort((a, b) => a.price - b.price);
+  } else {
+    products.sort((a, b) => a.quantity - b.quantity);
+  };
+
+  if (!sortedBy.ascending) products.reverse();
 
   return (
     <div className="product-listing">
       <h2>Products</h2>
       <div>
         {"Sort by: "}
-        <button className={sortedBy === "name" ? "sort-selection" : ""}>
-          Name
+        <button
+          className={sortedBy.name === "title" ? "sort-selection" : ""}
+          onClick={handleSortBy("title")}>
+          {"Name "}
+          {sortedBy.name === "title" ?
+            <Arrow ascending={sortedBy.ascending} /> : null
+          }
         </button>
-        <button className={sortedBy === "price" ? "sort-selection" : ""}>
-          Price
+        <button
+          className={sortedBy.name === "price" ? "sort-selection" : ""}
+          onClick={handleSortBy("price")}>
+          {"Price "}
+          {sortedBy.name === "price" ?
+            <Arrow ascending={sortedBy.ascending} /> : null
+          }
         </button>
-        <button className={sortedBy === "quantity" ? "sort-selection" : ""}>
-          Quantity
+        <button
+          className={sortedBy.name === "quantity" ? "sort-selection" : ""}
+          onClick={handleSortBy("quantity")}>
+          {"Quantity "}
+          {sortedBy.name === "quantity" ?
+            <Arrow ascending={sortedBy.ascending} /> : null
+          }
         </button>
       </div>
       <ul className="product-list">
