@@ -18,12 +18,18 @@ const Products = ({
   return (
     <div className="product-listing">
       <h2>Products</h2>
-      {/* <div>
+      <div>
         {"Sort by: "}
-        <button className={sortedBy === "name"}>Name</button>
-        <button className={sortedBy === "price"}>Price</button>
-        <button className={sortedBy === "quantity"}>Quantity</button>
-      </div> */}
+        <button className={sortedBy === "name" ? "sort-selection" : ""}>
+          Name
+        </button>
+        <button className={sortedBy === "price" ? "sort-selection" : ""}>
+          Price
+        </button>
+        <button className={sortedBy === "quantity" ? "sort-selection" : ""}>
+          Quantity
+        </button>
+      </div>
       <ul className="product-list">
         {products.map(({ _id, title, price, quantity }) => {
           return <EditableProduct
