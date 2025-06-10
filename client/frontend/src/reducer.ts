@@ -25,6 +25,9 @@ export const productsReducer = (state: Product[], action: ProductActions) => {
         return product._id === action.id ? action.response : product;
       });
     }
+    default: {
+      throw Error("Unknown action: " + (action as any).type);
+    }
   };
 };
 
@@ -52,6 +55,9 @@ export const cartReducer = (state: Cart[], action: CartActions) => {
       } else {
         return state.concat(action.response.item);
       }
+    }
+    default: {
+      throw Error("Unknown action: " + (action as any).type);
     }
   };
 };
