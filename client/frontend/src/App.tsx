@@ -1,33 +1,39 @@
 import AddProduct from "./components/AddProduct";
 import Header from "./components/Header";
 import Products from "./components/Products";
-import { useState, useEffect } from "react";
+import { useEffect, useReducer } from "react";
 import { getAllCartProducts, getAllProducts } from "./services";
-import type { Product, Cart } from "./types";
+import { productsReducer, cartReducer } from "./reducer";
 
 const App = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [cart, setCart] = useState<Cart[]>([]);
+  const [products, productDispatch] = useReducer(productsReducer, []);
+  const [cart, cartDispatch] = useReducer(cartReducer, []);
 
   useEffect(() => {
     (async () => {
       const fetchedProducts = await getAllProducts();
-      setProducts(fetchedProducts);
+      productDispatch({
+        type: "SET_INITIAL_PRODUCTS",
+        products: fetchedProducts
+      });
+
       const fetchedCartProducts = await getAllCartProducts();
-      setCart(fetchedCartProducts);
+      cartDispatch({
+        type: "SET_INITIAL_CART",
+        cart: fetchedCartProducts
+      });
     })();
   }, []);
 
   return (
     <div id="app">
-      <Header cart={cart} setCart={setCart} />
+      <Header cart={cart} cartDispatch={cartDispatch} />
       <main>
         <Products
           products={products}
-          setProducts={setProducts}
-          cart={cart}
-          setCart={setCart} />
-        <AddProduct products={products} setProducts={setProducts} />
+          productDispatch={productDispatch}
+          cartDispatch={cartDispatch} />
+        <AddProduct productDispatch={productDispatch} />
       </main>
     </div>
   )

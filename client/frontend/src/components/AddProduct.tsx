@@ -1,29 +1,27 @@
-import { useState } from 'react';
-import AddButton from './AddButton';
-import AddForm from './AddForm';
-import type { Product } from '../types';
+import AddButton from "./AddButton";
+import AddForm from "./AddForm";
+import { useState } from "react";
+import type { ProductActions } from "../types";
 
 interface AddProductProps {
-  products: Product[],
-  setProducts: React.Dispatch<React.SetStateAction<Product[]>>
+  productDispatch: React.ActionDispatch<[action: ProductActions]>
 }
 
-const AddProduct = ({ products, setProducts }: AddProductProps) => {
-  const [displayAddForm, setDisplayAddForm] = useState(false)
+const AddProduct = ({ productDispatch }: AddProductProps) => {
+  const [displayAddForm, setDisplayAddForm] = useState(false);
 
   const handleClick = (event: React.SyntheticEvent) => {
     event.preventDefault();
     setDisplayAddForm(!displayAddForm);
-  }
+  };
 
   if (displayAddForm) {
     return <AddForm
       handleClick={handleClick}
-      products={products}
-      setProducts={setProducts} />
+      productDispatch={productDispatch} />
   } else {
     return <AddButton handleClick={handleClick} />
-  }
-}
+  };
+};
 
 export default AddProduct;

@@ -1,14 +1,13 @@
-import type { Product } from "../types";
 import { addNew } from "../services";
 import { useState } from "react";
+import type { ProductActions } from "../types";
 
 interface AddFormProps {
   handleClick: (event: React.SyntheticEvent) => void,
-  products: Product[],
-  setProducts: React.Dispatch<React.SetStateAction<Product[]>>
+  productDispatch: React.ActionDispatch<[action: ProductActions]>
 }
 
-const AddForm = ({ handleClick, products, setProducts }: AddFormProps) => {
+const AddForm = ({ handleClick, productDispatch }: AddFormProps) => {
   const [formData, setFormData] = useState({
     "product-name": "",
     "product-price": "",
@@ -30,7 +29,7 @@ const AddForm = ({ handleClick, products, setProducts }: AddFormProps) => {
 
     const response = await addNew(newProduct);
     handleClick(event);
-    setProducts(products.concat(response));
+    productDispatch({ type: "ADD_NEW", response: response });
   };
 
   return (

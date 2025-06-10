@@ -1,6 +1,8 @@
-import type { AddProps } from "../types";
+export interface AddButtonProps {
+  handleClick: (event: React.SyntheticEvent) => void
+};
 
-const AddButton = ({ handleClick }: AddProps) => {
+const AddButton = ({ handleClick }: AddButtonProps) => {
   return (
     <p>
       <button onClick={handleClick} className="add-product-button">

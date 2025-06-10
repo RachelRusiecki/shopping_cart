@@ -1,16 +1,16 @@
 import ProductCart from "./ProductCart";
 import { checkout } from "../services";
-import type { Cart } from "../types";
+import type { Cart, CartActions } from "../types";
 
 interface HeaderProps {
   cart: Cart[],
-  setCart: React.Dispatch<React.SetStateAction<Cart[]>>
+  cartDispatch: React.ActionDispatch<[action: CartActions]>
 };
 
-const Header = ({ cart, setCart }: HeaderProps) => {
+const Header = ({ cart, cartDispatch }: HeaderProps) => {
   const handleCheckout = async () => {
     await checkout();
-    setCart([]);
+    cartDispatch({ type: "CHECKOUT" });
   };
 
   return (

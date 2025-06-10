@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { updateProduct } from "../services";
-import type { Product } from "../types";
+import type { ProductActions } from "../types";
 
 interface EditFormProps {
-  products: Product[],
-  setProducts: React.Dispatch<React.SetStateAction<Product[]>>
+  productDispatch: React.ActionDispatch<[action: ProductActions]>,
   _id: string,
   title: string,
   price: number,
@@ -13,8 +12,7 @@ interface EditFormProps {
 };
 
 const EditForm = ({
-  products,
-  setProducts,
+  productDispatch,
   _id,
   title,
   price,
@@ -39,9 +37,7 @@ const EditForm = ({
 
     const response = await updateProduct(_id, updatedProduct);
     toggleEditForm();
-    setProducts(products.map(product => {
-      return product._id === _id ? response : product;
-    }));
+    productDispatch({ type: "UPDATE", id: _id, response: response });
   };
 
   return (

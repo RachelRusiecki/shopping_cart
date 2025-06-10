@@ -1,6 +1,6 @@
 import type { Cart } from "../types";
 
-export interface CartProps { cart: Cart[] }
+export interface CartProps { cart: Cart[] };
 
 const ProductCart = ({ cart }: CartProps) => {
   if (cart.length === 0) {
