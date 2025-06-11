@@ -200,3 +200,13 @@ table td.total {
   text-align: right;
   padding-top: 20px;
 }
+
+.light {
+  color: #333b3c;
+  background-color: #efedea;
+}
+
+.dark {
+  color: #efefec;
+  background-color: #223a2c;
+}
