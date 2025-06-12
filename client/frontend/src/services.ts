@@ -11,6 +11,7 @@ const baseUrl = "http://localhost:5001/api";
 
 export const getAllCartProducts = async () => {
   const res = await axios.get<Cart[]>(`${baseUrl}/cart`);
+
   return res.data;
 };
 

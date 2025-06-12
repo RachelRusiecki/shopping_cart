@@ -1,28 +1,43 @@
-export interface Product {
-  _id: string,
-  title: string,
-  price: number,
-  quantity: number,
-  createdAt: string,
-  updatedAt: string,
-  _v: number
-};
+import { z } from "zod";
 
-export interface NewProduct {
-  title: string,
-  quantity: string,
-  price: string
-};
+export const productSchema = z.object({
+  _id: z.string().min(1),
+  title: z.string().min(1),
+  price: z.number().min(0),
+  quantity: z.number().min(0),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  _v: z.number()
+});
 
-export type UpdatedProduct = {
-  title: string,
-  quantity: number,
-  price: number
-};
+export type Product = z.infer<typeof productSchema>;
 
-export interface Cart extends Product { productId: string };
+export const cartSchema = productSchema.extend({ productId: z.string() });
 
-export interface CartRes { product: Product, item: Cart };
+export type Cart = z.infer<typeof cartSchema>;
+
+export const newProductSchema = z.object({
+  title: z.string().min(1),
+  quantity: z.string().min(1),
+  price: z.string().min(1)
+});
+
+export type NewProduct = z.infer<typeof newProductSchema>;
+
+export const updatedProductSchema = z.object({
+  title: z.string().min(1),
+  quantity: z.number().min(0),
+  price: z.number().min(0)
+});
+
+export type UpdatedProduct = z.infer<typeof updatedProductSchema>;
+
+export const cartResSchema = z.object({
+  product: productSchema,
+  item: cartSchema
+});
+
+export type CartRes = z.infer<typeof cartResSchema>;
 
 interface SetInitialProductsActions {
   type: "SET_INITIAL_PRODUCTS",
